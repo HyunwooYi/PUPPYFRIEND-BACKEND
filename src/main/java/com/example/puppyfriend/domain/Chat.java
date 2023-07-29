@@ -11,7 +11,9 @@ public class Chat {
     @GeneratedValue
     private int chat_id;
 
-    private int room_id;
+    @ManyToOne
+    @JoinColumn(name = "room_id")
+    private Room room;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
