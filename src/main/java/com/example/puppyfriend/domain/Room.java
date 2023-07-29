@@ -1,6 +1,7 @@
 package com.example.puppyfriend.domain;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Entity
