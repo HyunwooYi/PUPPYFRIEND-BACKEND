@@ -13,5 +13,4 @@ public class Snsphoto {
     private Sns sns;
     @Column(length = 45)
     private String photo;
-
 }
