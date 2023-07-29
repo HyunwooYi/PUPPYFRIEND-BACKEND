@@ -16,5 +16,5 @@ public class Sns {
 
     @Enumerated(EnumType.STRING)
     private snsCategory category;
-    private LocalDateTime create_at;
+    private Timestamp create_at;
 }
