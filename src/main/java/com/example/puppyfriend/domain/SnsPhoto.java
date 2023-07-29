@@ -3,7 +3,7 @@ package com.example.puppyfriend.domain;
 import javax.persistence.*;
 
 @Entity
-public class Sns_photo {
+public class Snsphoto {
 
     @Id
     @GeneratedValue
