@@ -1,5 +1,6 @@
 package com.example.puppyfriend.domain;
 
-public enum snsCategory {
-    HAPPY, EXERCISE
+public enum SnsCategory {
+    Question,
+    Worry
 }
