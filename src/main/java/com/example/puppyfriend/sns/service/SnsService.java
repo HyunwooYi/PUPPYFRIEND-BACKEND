@@ -4,6 +4,7 @@ import com.example.puppyfriend.UserRepository;
 import com.example.puppyfriend.domain.User;
 import com.example.puppyfriend.sns.domain.Sns;
 import com.example.puppyfriend.sns.domain.SnsPhoto;
+import com.example.puppyfriend.sns.dto.GetUserPostRes;
 import com.example.puppyfriend.sns.dto.PostReq;
 import com.example.puppyfriend.sns.repository.SnsPhotoRepository;
 import com.example.puppyfriend.sns.repository.SnsRepository;
@@ -13,8 +14,7 @@ import com.example.puppyfriend.util.BaseResponseStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,9 +22,9 @@ import java.util.Optional;
 @Service
 public class SnsService {
 
-    private SnsRepository snsRepository;
-    private SnsPhotoRepository snsPhotoRepository;
-    private UserRepository userRepository;
+    private final SnsRepository snsRepository;
+    private final SnsPhotoRepository snsPhotoRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     public SnsService(SnsRepository snsRepository, SnsPhotoRepository snsPhotoRepository, UserRepository userRepository) {
@@ -40,20 +40,21 @@ public class SnsService {
                 throw new BaseException(BaseResponseStatus.POST_EMPTY);
             }
 
-            Optional<User> optionalUser = userRepository.findById(postReq.getUser_id());
+            Optional<User> optionalUser = userRepository.findById(postReq.getUserIdx());
+
             if (optionalUser.isEmpty()) {
                 throw new BaseException(BaseResponseStatus.POST_USER_NOT_FOUND);
             }
 
             User user = optionalUser.get();
-            LocalDate create = LocalDate.now();
+            LocalDateTime create = LocalDateTime.now();
 
             Sns sns = new Sns();
-            sns.setUser_id(user);
+            sns.setUserIdx(user);
             sns.setTitle(postReq.getTitle());
             sns.setPost(postReq.getPost());
             sns.setCategory(postReq.getCategory());
-            sns.setCreate_at(create);
+            sns.setCreateAt(create);
             sns.setColor(postReq.getColor());
 
             sns = snsRepository.save(sns);
@@ -73,14 +74,25 @@ public class SnsService {
         }
     }
 
-    //내 게시글 조회
-//    public BaseResponse<List<Sns>> getAllMyPosts() {
-//        try {
-//            List<Sns> snsList = snsRepository.findAll();
-//            return new BaseResponse<>(snsList);
-//        } catch (Exception e) {
-//            return new BaseResponse<>(BaseResponseStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
+    //특정 사용자 게시글 조회
+    public BaseResponse<List<GetUserPostRes.SnsInfo>> getUserPosts(int userIdx) throws BaseException {
+        try {
+            User user = new User();
+            user.setUserIdx(userIdx);
+
+            List<Sns> snsList = snsRepository.findPostsByUser(user);
+
+            if (snsList.isEmpty()) {
+                throw new BaseException(BaseResponseStatus.POST_UNAVAILABLE);
+            }
+
+            List<GetUserPostRes.SnsInfo> result = GetUserPostRes.convertToGetUserPostResSnsInfo(snsList);
+
+            return new BaseResponse<>(result);
+
+        } catch (BaseException e) {
+            return new BaseResponse<>(BaseResponseStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 }

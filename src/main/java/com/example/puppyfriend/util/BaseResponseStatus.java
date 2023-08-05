@@ -16,6 +16,7 @@ public enum BaseResponseStatus {
     POST_OVER(false, 4779, "제한 글자 45자를 초과했습니다."),
     POST_BACKGROUND_COLOR(false, 4780, "배경사진을 선택해주세요."),
     POST_USER_NOT_FOUND(false, 4781, "해당 유저를 찾지 못했습니다."),
+    POST_UNAVAILABLE(false, 4781, "해당 유저의 기록이 없습니다."),
 
     INTERNAL_SERVER_ERROR(false, 5000, "토큰을 확인해주세요."),
     ;
