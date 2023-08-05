@@ -1,4 +1,4 @@
-package com.example.puppyfriend.domain;
+package com.example.puppyfriend.sns.domain;
 
 import com.example.puppyfriend.sns.domain.Sns;
 import lombok.AccessLevel;
@@ -16,7 +16,7 @@ import javax.persistence.*;
 public class SnsPhoto {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int sns_photo_id;
 
     @OneToOne
@@ -28,7 +28,8 @@ public class SnsPhoto {
     private String imageUrl;
 
     @Builder
-    public SnsPhoto(String imageUrl){
+    public SnsPhoto(Sns sns, String imageUrl){
+        this.sns = sns;
         this.imageUrl = imageUrl;
     }
 }
