@@ -8,9 +8,9 @@ public class Walk {
 
     @Id
     @GeneratedValue
-    private int walk_id;
+    private int walkIdx;
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userIdx")
     private User user;
     private LocalDate date;
     @Column(length = 45)

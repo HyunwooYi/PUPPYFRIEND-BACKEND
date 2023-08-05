@@ -9,10 +9,10 @@ public class Puppy {
 
     @Id
     @GeneratedValue
-    private int puppy_id;
+    private int puppyIdx;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userIdx")
     private User user;
 
     private LocalDate birth;

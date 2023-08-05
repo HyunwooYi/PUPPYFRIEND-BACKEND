@@ -8,9 +8,9 @@ public class Follow {
 
     @Id
     @GeneratedValue
-    private int follow_id;
+    private int followIdx;
 
-    private int room_id;
+    private int roomIdx;
 
     @ManyToOne
     @JoinColumn(name = "follower")

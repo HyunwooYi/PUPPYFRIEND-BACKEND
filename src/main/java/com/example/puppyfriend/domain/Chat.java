@@ -9,14 +9,14 @@ public class Chat {
 
     @Id
     @GeneratedValue
-    private int chat_id;
+    private int chatIdx;
 
     @ManyToOne
-    @JoinColumn(name = "room_id")
+    @JoinColumn(name = "roomIdx")
     private Room room;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userIdx")
     private User user;
 
     @Column(length = 45)

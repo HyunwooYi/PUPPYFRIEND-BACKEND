@@ -7,7 +7,7 @@ import java.time.LocalDate;
 public class User {
 
     @Id @GeneratedValue
-    private int user_id;
+    private int userIdx;
 
     @Column(length = 12)
     private String id;
@@ -26,4 +26,8 @@ public class User {
     @Column(length = 45)
     private String accessToken;
     private int status;
+
+    public void setUserIdx(int userIdx) {
+        this.userIdx = userIdx;
+    }
 }

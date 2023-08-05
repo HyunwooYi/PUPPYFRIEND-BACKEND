@@ -7,6 +7,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -16,11 +17,11 @@ import java.time.LocalDate;
 public class Sns {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int sns_id;
+    private int snsIdx;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user_id;
+    @JoinColumn(name = "userIdx")
+    private User userIdx;
 
     private String title;
 
@@ -30,19 +31,24 @@ public class Sns {
     @Enumerated(EnumType.STRING)
     private SnsCategory category;
 
-    private LocalDate create_at;
+    private LocalDateTime createAt;
 
     private SnsColor color;
 
+    @OneToOne(mappedBy = "sns", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private SnsPhoto snsPhoto;
+
+
     @Builder
-    public Sns(User user_id, String title, String post, SnsCategory category,
-               LocalDate create_at, SnsColor color){
-        this.user_id = user_id;
+    public Sns(User userIdx, String title, String post, SnsCategory category,
+               LocalDateTime createAt, SnsColor color, SnsPhoto snsPhoto){
+        this.userIdx = userIdx;
         this.title = title;
         this.post = post;
         this.category = category;
-        this.create_at = create_at;
+        this.createAt = createAt;
         this.color = color;
+        this.snsPhoto = snsPhoto;
     }
 
 }

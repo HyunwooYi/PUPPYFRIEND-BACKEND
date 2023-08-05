@@ -7,13 +7,13 @@ public class Block {
 
     @Id
     @GeneratedValue
-    private int block_id;
+    private int blockIdx;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userIdx")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "user_id2")
+    @JoinColumn(name = "userIdx2")
     private User user2;
 }

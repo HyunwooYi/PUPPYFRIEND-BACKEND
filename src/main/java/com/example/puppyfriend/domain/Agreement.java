@@ -7,10 +7,10 @@ public class Agreement {
 
     @Id
     @GeneratedValue
-    private int agreement_id;
+    private int agreementIdx;
 
     @OneToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userIdx")
     private User user;
 
     private int required;
