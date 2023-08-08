@@ -3,7 +3,6 @@ package com.example.puppyfriend.sns.dto;
 import com.example.puppyfriend.domain.*;
 import com.example.puppyfriend.sns.domain.Sns;
 import com.example.puppyfriend.sns.domain.SnsPhoto;
-import com.example.puppyfriend.util.BaseResponseStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,7 +17,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetUserPostRes {
+public class GetPostRes {
     private List<SnsInfo> sns;
 
     @Getter
