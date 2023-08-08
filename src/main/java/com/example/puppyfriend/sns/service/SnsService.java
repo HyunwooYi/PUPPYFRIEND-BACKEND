@@ -8,7 +8,8 @@ import com.example.puppyfriend.domain.SnsCategory;
 import com.example.puppyfriend.domain.User;
 import com.example.puppyfriend.sns.domain.Sns;
 import com.example.puppyfriend.sns.domain.SnsPhoto;
-import com.example.puppyfriend.sns.dto.GetUserPostRes;
+import com.example.puppyfriend.sns.dto.GetPostRes;
+import com.example.puppyfriend.sns.dto.GetUserSnsRes;
 import com.example.puppyfriend.sns.dto.PostReq;
 import com.example.puppyfriend.sns.repository.SnsPhotoRepository;
 import com.example.puppyfriend.sns.repository.SnsRepository;
@@ -19,9 +20,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static com.example.puppyfriend.sns.dto.GetPostRes.convertToGetUserPostResSnsInfo;
 
 
 @Service
@@ -85,27 +87,65 @@ public class SnsService {
     }
 
     //특정 사용자 게시글 조회
-    public BaseResponse<List<GetUserPostRes.SnsInfo>> getUserPosts(int userIdx) throws BaseException {
+//    public BaseResponse<List<GetUserPostRes.SnsInfo>> getUserPosts(int userIdx) throws BaseException {
+//        try {
+//            User user = new User();
+//            user.setUserIdx(userIdx);
+//
+//            List<Sns> snsList = snsRepository.findPostsByUser(user);
+//
+//            if (snsList.isEmpty()) {
+//                throw new BaseException(BaseResponseStatus.POST_UNAVAILABLE);
+//            }
+//            List<GetUserPostRes.SnsInfo> result = GetUserPostRes.convertToGetUserPostResSnsInfo(snsList);
+//
+//            return new BaseResponse<>(result);
+//        } catch (BaseException e) {
+//            return new BaseResponse<>(BaseResponseStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
+
+    public BaseResponse<GetUserSnsRes> getUserPosts(int userIdx) throws BaseException {
         try {
-            User user = new User();
-            user.setUserIdx(userIdx);
+            User user = userRepository.findById(userIdx).orElseThrow(() -> new BaseException(BaseResponseStatus.POST_USER_NOT_FOUND));
 
             List<Sns> snsList = snsRepository.findPostsByUser(user);
 
             if (snsList.isEmpty()) {
                 throw new BaseException(BaseResponseStatus.POST_UNAVAILABLE);
             }
-            List<GetUserPostRes.SnsInfo> result = GetUserPostRes.convertToGetUserPostResSnsInfo(snsList);
 
-            return new BaseResponse<>(result);
+            List<GetUserSnsRes.SnsInfo> result = GetUserSnsRes.convertToGetUserSnsResSnsInfo(snsList);
+
+            GetUserSnsRes response = new GetUserSnsRes();
+            response.setSns(result);
+
+            response.setNickname(user.getNickname());
+
+            Puppy puppy = puppyRepository.findByUser(user)
+                    .orElseThrow(() -> new BaseException(BaseResponseStatus.PUPPY_NOT_FOUND));
+
+            response.setName(puppy.getName());
+            response.setType(puppy.getType());
+            response.setAge(puppy.getAge());
+            response.setSex(puppy.getSex());
+            response.setPersonality(puppy.getPersonality());
+
+            int followingCount = followRepository.countByFollowing(user);
+            int followerCount = followRepository.countByFollower(user);
+
+            response.setFollowing(followingCount);
+            response.setFollower(followerCount);
+
+            return new BaseResponse<>(response);
         } catch (BaseException e) {
-            return new BaseResponse<>(BaseResponseStatus.INTERNAL_SERVER_ERROR);
+            return new BaseResponse<>(e.getStatus());
         }
     }
 
 
     //둘러보기 - 전체
-    public BaseResponse<List<GetUserPostRes.SnsInfo>> getAllSnsPosts() throws BaseException {
+    public BaseResponse<List<GetPostRes.SnsInfo>> getAllSnsPosts() throws BaseException {
         try {
 
             List<Sns> snsList = snsRepository.findAll();
@@ -114,7 +154,7 @@ public class SnsService {
                 throw new BaseException(BaseResponseStatus.POST_UNAVAILABLE);
             }
 
-            List<GetUserPostRes.SnsInfo> result = GetUserPostRes.convertToGetUserPostResSnsInfo(snsList);
+            List<GetPostRes.SnsInfo> result = convertToGetUserPostResSnsInfo(snsList);
 
             return new BaseResponse<>(result);
 
@@ -124,7 +164,7 @@ public class SnsService {
     }
 
     //둘러보기 - 고민
-    public BaseResponse<List<GetUserPostRes.SnsInfo>> getWorrySnsPosts() throws BaseException {
+    public BaseResponse<List<GetPostRes.SnsInfo>> getWorrySnsPosts() throws BaseException {
         try {
             List<Sns> snsList = snsRepository.findSnsByCategory(SnsCategory.Worry);
 
@@ -132,7 +172,7 @@ public class SnsService {
                 throw new BaseException(BaseResponseStatus.POST_UNAVAILABLE);
             }
 
-            List<GetUserPostRes.SnsInfo> result = GetUserPostRes.convertToGetUserPostResSnsInfo(snsList);
+            List<GetPostRes.SnsInfo> result = convertToGetUserPostResSnsInfo(snsList);
 
             return new BaseResponse<>(result);
 
@@ -142,7 +182,7 @@ public class SnsService {
     }
 
     //둘러보기 - 질문
-    public BaseResponse<List<GetUserPostRes.SnsInfo>> getQuestionSnsPosts() throws BaseException {
+    public BaseResponse<List<GetPostRes.SnsInfo>> getQuestionSnsPosts() throws BaseException {
         try {
             List<Sns> snsList = snsRepository.findSnsByCategory(SnsCategory.Question);
 
@@ -150,7 +190,7 @@ public class SnsService {
                 throw new BaseException(BaseResponseStatus.POST_UNAVAILABLE);
             }
 
-            List<GetUserPostRes.SnsInfo> result = GetUserPostRes.convertToGetUserPostResSnsInfo(snsList);
+            List<GetPostRes.SnsInfo> result = convertToGetUserPostResSnsInfo(snsList);
 
             return new BaseResponse<>(result);
 

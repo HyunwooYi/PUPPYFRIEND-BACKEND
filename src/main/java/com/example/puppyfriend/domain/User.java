@@ -1,9 +1,17 @@
 package com.example.puppyfriend.domain;
 
+import com.example.puppyfriend.sns.domain.SnsPhoto;
+import lombok.*;
+
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
 @Entity
 public class User {
 
@@ -40,4 +48,14 @@ public class User {
     public void setUserIdx(int userIdx) {
         this.userIdx = userIdx;
     }
+
+    @Builder
+    public User(int userIdx, String id, String password, String nickname,
+               String name, String email, Boolean gender, LocalDate birth, String location, String accessToken, int status){
+        this.userIdx = userIdx;
+        this.id = id;
+        this.password = password;
+        this.nickname = nickname;
+    }
+
 }

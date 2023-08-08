@@ -1,9 +1,18 @@
 package com.example.puppyfriend.domain;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
 @Entity
 public class Puppy {
 
@@ -27,6 +36,9 @@ public class Puppy {
 
     @Enumerated(EnumType.STRING)
     private PuppyAge age;
+
+    @Enumerated(EnumType.STRING)
+    private PuppySex sex;
 
     @Enumerated(EnumType.STRING)
     private PuppySize size;

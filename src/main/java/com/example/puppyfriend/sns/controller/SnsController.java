@@ -1,6 +1,7 @@
 package com.example.puppyfriend.sns.controller;
 
-import com.example.puppyfriend.sns.dto.GetUserPostRes;
+import com.example.puppyfriend.sns.dto.GetPostRes;
+import com.example.puppyfriend.sns.dto.GetUserSnsRes;
 import com.example.puppyfriend.sns.dto.PostReq;
 import com.example.puppyfriend.sns.service.SnsService;
 import com.example.puppyfriend.util.BaseException;
@@ -34,7 +35,7 @@ public class SnsController {
     //특정 사용자 게시글 조회
     @ResponseBody
     @GetMapping("/{userIdx}")
-    public BaseResponse<List<GetUserPostRes.SnsInfo>> getUserPosts(@PathVariable int userIdx) {
+    public BaseResponse<GetUserSnsRes> getUserPosts(@PathVariable int userIdx) {
         try {
             return snsService.getUserPosts(userIdx);
         } catch (BaseException e) {
@@ -45,7 +46,7 @@ public class SnsController {
     //둘러보기 - 전체
     @ResponseBody
     @GetMapping("/all")
-    public BaseResponse<List<GetUserPostRes.SnsInfo>> getAllSnsPosts() {
+    public BaseResponse<List<GetPostRes.SnsInfo>> getAllSnsPosts() {
         try {
             return snsService.getAllSnsPosts();
         } catch (BaseException e) {
@@ -56,7 +57,7 @@ public class SnsController {
     //둘러보기 - 고민
     @ResponseBody
     @GetMapping("/worry")
-    public BaseResponse<List<GetUserPostRes.SnsInfo>> getWorryPosts() {
+    public BaseResponse<List<GetPostRes.SnsInfo>> getWorryPosts() {
         try {
             return snsService.getWorrySnsPosts();
         } catch (BaseException e) {
@@ -67,7 +68,7 @@ public class SnsController {
     //둘러보기 - 질문
     @ResponseBody
     @GetMapping("/question")
-    public BaseResponse<List<GetUserPostRes.SnsInfo>> getQuestionPosts() {
+    public BaseResponse<List<GetPostRes.SnsInfo>> getQuestionPosts() {
         try {
             return snsService.getQuestionSnsPosts();
         } catch (BaseException e) {
