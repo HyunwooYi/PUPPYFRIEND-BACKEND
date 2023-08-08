@@ -1,5 +1,7 @@
 package com.example.puppyfriend.sns.dto;
 
+import com.example.puppyfriend.domain.PuppyAge;
+import com.example.puppyfriend.domain.PuppyType;
 import com.example.puppyfriend.domain.SnsCategory;
 import com.example.puppyfriend.domain.SnsColor;
 import com.example.puppyfriend.sns.domain.Sns;
@@ -20,6 +22,22 @@ import java.util.List;
 @AllArgsConstructor
 public class GetUserPostRes {
     private List<SnsInfo> sns;
+
+    private String nickname;
+
+    private String name;
+
+    private PuppyType type;
+
+    private PuppyAge age;
+
+    private Boolean gender;
+
+    private int following;
+
+    private int follower;
+
+    private String personality;
 
     @Getter
     @Setter
