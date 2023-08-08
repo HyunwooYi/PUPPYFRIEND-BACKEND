@@ -19,6 +19,7 @@ public class SnsController {
         this.snsService = snsService;
     }
 
+    //게시글 작성
     @ResponseBody
     @PostMapping("/post")
     public BaseResponse<String> createSnsPost(@RequestBody PostReq postReq) {
@@ -30,11 +31,45 @@ public class SnsController {
         }
     }
 
+    //특정 사용자 게시글 조회
     @ResponseBody
     @GetMapping("/{userIdx}")
     public BaseResponse<List<GetUserPostRes.SnsInfo>> getUserPosts(@PathVariable int userIdx) {
         try {
             return snsService.getUserPosts(userIdx);
+        } catch (BaseException e) {
+            return new BaseResponse<>(e.getStatus());
+        }
+    }
+
+    //둘러보기 - 전체
+    @ResponseBody
+    @GetMapping("/all")
+    public BaseResponse<List<GetUserPostRes.SnsInfo>> getAllSnsPosts() {
+        try {
+            return snsService.getAllSnsPosts();
+        } catch (BaseException e) {
+            return new BaseResponse<>(e.getStatus());
+        }
+    }
+
+    //둘러보기 - 고민
+    @ResponseBody
+    @GetMapping("/worry")
+    public BaseResponse<List<GetUserPostRes.SnsInfo>> getWorryPosts() {
+        try {
+            return snsService.getWorrySnsPosts();
+        } catch (BaseException e) {
+            return new BaseResponse<>(e.getStatus());
+        }
+    }
+
+    //둘러보기 - 질문
+    @ResponseBody
+    @GetMapping("/question")
+    public BaseResponse<List<GetUserPostRes.SnsInfo>> getQuestionPosts() {
+        try {
+            return snsService.getQuestionSnsPosts();
         } catch (BaseException e) {
             return new BaseResponse<>(e.getStatus());
         }

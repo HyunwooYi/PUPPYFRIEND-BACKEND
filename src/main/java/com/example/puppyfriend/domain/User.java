@@ -2,6 +2,7 @@ package com.example.puppyfriend.domain;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class User {
@@ -26,6 +27,15 @@ public class User {
     @Column(length = 45)
     private String accessToken;
     private int status;
+
+    @OneToMany(mappedBy = "user")
+    private List<Puppy> puppyList;
+
+    @OneToMany(mappedBy = "follower")
+    private List<Follow> followingList;
+
+    @OneToMany(mappedBy = "following")
+    private List<Follow> followerList;
 
     public void setUserIdx(int userIdx) {
         this.userIdx = userIdx;

@@ -28,7 +28,6 @@ public class Sns {
     @Column(length = 45, nullable = false)
     private String post;
 
-    @Enumerated(EnumType.STRING)
     private SnsCategory category;
 
     private LocalDateTime createAt;
