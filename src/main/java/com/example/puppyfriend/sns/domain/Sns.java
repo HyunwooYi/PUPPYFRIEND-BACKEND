@@ -25,7 +25,7 @@ public class Sns {
 
     private String title;
 
-    @Column(length = 45, nullable = false)
+    @Column(nullable = false)
     private String post;
 
     private SnsCategory category;
