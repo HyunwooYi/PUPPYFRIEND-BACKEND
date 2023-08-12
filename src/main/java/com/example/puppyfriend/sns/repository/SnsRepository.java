@@ -25,4 +25,6 @@ public interface SnsRepository extends JpaRepository<Sns, Integer> {
     //둘러보기 - 카테고리
     @Query("SELECT s FROM Sns s WHERE s.category = :category")
     List<Sns> findSnsByCategory(SnsCategory category);
+
+
 }

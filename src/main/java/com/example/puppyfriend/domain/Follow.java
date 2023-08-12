@@ -1,16 +1,23 @@
 package com.example.puppyfriend.domain;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
 @Entity
 public class Follow {
 
     @Id
     @GeneratedValue
     private int followIdx;
-
-    private int roomIdx;
 
     @ManyToOne
     @JoinColumn(name = "follower")

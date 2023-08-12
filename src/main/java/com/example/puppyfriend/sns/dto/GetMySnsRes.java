@@ -18,7 +18,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetUserSnsRes {
+public class GetMySnsRes {
     private String nickname;
 
     private String name;
@@ -35,7 +35,7 @@ public class GetUserSnsRes {
 
     private String personality;
 
-    private List<GetUserSnsRes.SnsInfo> sns;
+    private List<GetMySnsRes.SnsInfo> sns;
 
     @Getter
     @Setter
@@ -60,10 +60,10 @@ public class GetUserSnsRes {
 
     private BaseResponseStatus status;   // 예외 상태 정보를 저장할 필드
 
-    public static List<GetUserSnsRes.SnsInfo> convertToGetUserSnsResSnsInfo(List<Sns> snsList) {
-        List<GetUserSnsRes.SnsInfo> result = new ArrayList<>();
+    public static List<GetMySnsRes.SnsInfo> convertToGetUserSnsResSnsInfo(List<Sns> snsList) {
+        List<GetMySnsRes.SnsInfo> result = new ArrayList<>();
         for (Sns sns : snsList) {
-            GetUserSnsRes.SnsInfo snsInfo = new GetUserSnsRes.SnsInfo();
+            GetMySnsRes.SnsInfo snsInfo = new GetMySnsRes.SnsInfo();
             snsInfo.setSnsIdx(sns.getSnsIdx());
             snsInfo.setPost(sns.getPost());
             snsInfo.setTitle(sns.getTitle());
@@ -81,7 +81,7 @@ public class GetUserSnsRes {
         return result;
     }
 
-    public GetUserSnsRes(BaseResponseStatus status) {
+    public GetMySnsRes(BaseResponseStatus status) {
         this.status = status;
     }
 }
