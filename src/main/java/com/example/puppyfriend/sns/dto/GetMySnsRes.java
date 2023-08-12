@@ -33,7 +33,7 @@ public class GetMySnsRes {
 
     private int follower;
 
-    private String personality;
+    private PuppyPersonality personality;
 
     private List<GetMySnsRes.SnsInfo> sns;
 

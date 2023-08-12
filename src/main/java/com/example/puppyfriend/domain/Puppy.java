@@ -43,8 +43,8 @@ public class Puppy {
     @Enumerated(EnumType.STRING)
     private PuppySize size;
 
-    @Column(length = 45)
-    private String personality;
+    @Enumerated(EnumType.STRING)
+    private PuppyPersonality personality;
 
 
 }
