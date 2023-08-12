@@ -8,6 +8,8 @@ public enum BaseResponseStatus {
     SUCCESS(true, 1000, "요청에 성공하였습니다."),
     EMPTY_TOKEN(false, 1001, "토큰을 확인해주세요."),
 
+    ALREADY_FOLLOWED(false, 3701, "이미 팔로우 중입니다."),
+
     /*
      * 4000: [POST]
      * */
