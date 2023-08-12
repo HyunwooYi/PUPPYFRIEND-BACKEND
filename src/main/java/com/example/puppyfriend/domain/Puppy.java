@@ -20,7 +20,7 @@ public class Puppy {
     @GeneratedValue
     private int puppyIdx;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "userIdx")
     private User user;
 

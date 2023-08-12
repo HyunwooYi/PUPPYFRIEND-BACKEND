@@ -27,6 +27,10 @@ public class GetPostRes {
     public static class SnsInfo{
         private int snsIdx;
 
+        private String nickname;
+
+        private String puppyName;
+
         private String title;
 
         private String post;
@@ -46,6 +50,8 @@ public class GetPostRes {
         for (Sns sns : snsList) {
             SnsInfo snsInfo = new SnsInfo();
             snsInfo.setSnsIdx(sns.getSnsIdx());
+            snsInfo.setNickname(sns.getUserIdx().getNickname());
+            snsInfo.setPuppyName(sns.getUserIdx().getPuppy().getName());
             snsInfo.setPost(sns.getPost());
             snsInfo.setTitle(sns.getTitle());
             snsInfo.setCategory(sns.getCategory());

@@ -36,14 +36,14 @@ public class User {
     private String accessToken;
     private int status;
 
-    @OneToMany(mappedBy = "user")
-    private List<Puppy> puppyList;
-
     @OneToMany(mappedBy = "follower")
     private List<Follow> followingList;
 
     @OneToMany(mappedBy = "following")
     private List<Follow> followerList;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Puppy puppy;
 
     public void setUserIdx(int userIdx) {
         this.userIdx = userIdx;
