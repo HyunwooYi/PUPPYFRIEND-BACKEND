@@ -9,10 +9,7 @@ import com.example.puppyfriend.domain.SnsCategory;
 import com.example.puppyfriend.domain.User;
 import com.example.puppyfriend.sns.domain.Sns;
 import com.example.puppyfriend.sns.domain.SnsPhoto;
-import com.example.puppyfriend.sns.dto.FollowingListRes;
-import com.example.puppyfriend.sns.dto.GetPostRes;
-import com.example.puppyfriend.sns.dto.GetMySnsRes;
-import com.example.puppyfriend.sns.dto.PostReq;
+import com.example.puppyfriend.sns.dto.*;
 import com.example.puppyfriend.sns.repository.SnsPhotoRepository;
 import com.example.puppyfriend.sns.repository.SnsRepository;
 import com.example.puppyfriend.util.BaseException;
@@ -203,6 +200,29 @@ public class SnsService {
     public BaseResponse<List<GetPostRes.SnsInfo>> getQuestionSnsPosts() throws BaseException {
         try {
             List<Sns> snsList = snsRepository.findSnsByCategory(SnsCategory.Question);
+
+            if (snsList.isEmpty()) {
+                throw new BaseException(BaseResponseStatus.POST_UNAVAILABLE);
+            }
+
+            List<GetPostRes.SnsInfo> result = convertToGetUserPostResSnsInfo(snsList);
+
+            return new BaseResponse<>(result);
+
+        } catch (BaseException e) {
+            return new BaseResponse<>(BaseResponseStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    //둘러보기 - 검색
+    public BaseResponse<List<GetPostRes.SnsInfo>> searchSnsByConditions(SearchReq searchReq) throws BaseException {
+        try {
+            List<Sns> snsList = snsRepository.searchSnsByConditions(
+                    searchReq.getKeyword(),
+                    searchReq.getPuppyType(),
+                    searchReq.getPuppyAge(),
+                    searchReq.getPuppySize(),
+                    searchReq.getPuppyPersonality());
 
             if (snsList.isEmpty()) {
                 throw new BaseException(BaseResponseStatus.POST_UNAVAILABLE);

@@ -1,7 +1,6 @@
 package com.example.puppyfriend.sns.repository;
 
-import com.example.puppyfriend.domain.SnsCategory;
-import com.example.puppyfriend.domain.User;
+import com.example.puppyfriend.domain.*;
 import com.example.puppyfriend.sns.domain.Sns;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -26,5 +25,17 @@ public interface SnsRepository extends JpaRepository<Sns, Integer> {
     @Query("SELECT s FROM Sns s WHERE s.category = :category")
     List<Sns> findSnsByCategory(SnsCategory category);
 
+    //둘러보기 - 검색
+    @Query("SELECT s FROM Sns s " +
+            "WHERE (:keyword IS NULL OR s.userIdx.puppy.name = :keyword) " +
+            "AND (:puppyType IS NULL OR s.userIdx.puppy.type = :puppyType) " +
+            "AND (:puppyAge IS NULL OR s.userIdx.puppy.age = :puppyAge) " +
+            "AND (:puppySize IS NULL OR s.userIdx.puppy.size = :puppySize) " +
+            "AND (:puppyPersonality IS NULL OR s.userIdx.puppy.personality = :puppyPersonality)")
+    List<Sns> searchSnsByConditions(@Param("keyword") String keyword,
+                                    @Param("puppyType") PuppyType puppyType,
+                                    @Param("puppyAge") PuppyAge puppyAge,
+                                    @Param("puppySize") PuppySize puppySize,
+                                    @Param("puppyPersonality") PuppyPersonality puppyPersonality);
 
 }

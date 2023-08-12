@@ -1,9 +1,6 @@
 package com.example.puppyfriend.sns.controller;
 
-import com.example.puppyfriend.sns.dto.FollowingListRes;
-import com.example.puppyfriend.sns.dto.GetPostRes;
-import com.example.puppyfriend.sns.dto.GetMySnsRes;
-import com.example.puppyfriend.sns.dto.PostReq;
+import com.example.puppyfriend.sns.dto.*;
 import com.example.puppyfriend.sns.service.SnsService;
 import com.example.puppyfriend.util.BaseException;
 import com.example.puppyfriend.util.BaseResponse;
@@ -56,6 +53,17 @@ public class SnsController {
         }
     }
 
+    //내 팔로잉 조회
+    @ResponseBody
+    @GetMapping("/{userIdx}/follow")
+    public BaseResponse<List<FollowingListRes.FollowInfo>> getFollowing(@PathVariable int userIdx) {
+        try {
+            return snsService.getFollowingInfoByUserIdx(userIdx);
+        } catch (BaseException e) {
+            return new BaseResponse<>(e.getStatus());
+        }
+    }
+
     //둘러보기 - 전체
     @ResponseBody
     @GetMapping("/all")
@@ -89,13 +97,19 @@ public class SnsController {
         }
     }
 
+    //둘러보기 - 검색
     @ResponseBody
-    @GetMapping("/{userIdx}/follow")
-    public BaseResponse<List<FollowingListRes.FollowInfo>> getFollowing(@PathVariable int userIdx) {
+    @GetMapping("/search")
+    public BaseResponse<List<GetPostRes.SnsInfo>> searchSnsByConditions(@RequestBody SearchReq searchReq) {
         try {
-            return snsService.getFollowingInfoByUserIdx(userIdx);
+            List<GetPostRes.SnsInfo> snsList = snsService.searchSnsByConditions(searchReq).getResult();
+
+            return new BaseResponse<>(snsList);
+
         } catch (BaseException e) {
             return new BaseResponse<>(e.getStatus());
         }
     }
+
+
 }
