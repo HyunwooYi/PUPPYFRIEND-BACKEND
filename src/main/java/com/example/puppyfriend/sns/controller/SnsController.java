@@ -33,6 +33,18 @@ public class SnsController {
         }
     }
 
+    //게시글 삭제
+    @ResponseBody
+    @DeleteMapping("/post/{snsIdx}")
+    public BaseResponse<String> deleteSnsPost(@PathVariable int snsIdx) {
+        try {
+            snsService.deleteSnsPost(snsIdx);
+            return new BaseResponse<>("게시글 삭제 완료");
+        } catch (BaseException e) {
+            return new BaseResponse<>(e.getStatus());
+        }
+    }
+
     //내 Sns 조회
     @ResponseBody
     @GetMapping("/{userIdx}")

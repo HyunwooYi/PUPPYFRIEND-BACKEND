@@ -89,6 +89,18 @@ public class SnsService {
         }
     }
 
+    //게시글 삭제
+    public BaseResponse<Sns> deleteSnsPost(int snsIdx) throws BaseException {
+        try {
+            Sns sns = snsRepository.findById(snsIdx).orElseThrow(() -> new BaseException(BaseResponseStatus.POST_USER_NOT_FOUND));
+            snsRepository.delete(sns);
+
+            return new BaseResponse<>(sns);
+        } catch (BaseException e) {
+            return new BaseResponse<>(e.getStatus());
+        }
+    }
+
 
     //내 sns 조회
     public BaseResponse<GetMySnsRes> getUserPosts(int userIdx) throws BaseException {
