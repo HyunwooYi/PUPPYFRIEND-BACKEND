@@ -1,11 +1,10 @@
 package com.example.puppyfriend.domain;
 
-import com.example.puppyfriend.sns.domain.SnsPhoto;
+import com.example.puppyfriend.follow.domain.Follow;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter

@@ -1,9 +1,9 @@
 package com.example.puppyfriend.sns.service;
 
-import com.example.puppyfriend.FollowRepository;
+import com.example.puppyfriend.follow.repository.FollowRepository;
 import com.example.puppyfriend.PuppyRepository;
 import com.example.puppyfriend.UserRepository;
-import com.example.puppyfriend.domain.Follow;
+import com.example.puppyfriend.follow.domain.Follow;
 import com.example.puppyfriend.domain.Puppy;
 import com.example.puppyfriend.domain.SnsCategory;
 import com.example.puppyfriend.domain.User;
@@ -19,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

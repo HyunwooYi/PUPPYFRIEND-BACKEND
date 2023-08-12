@@ -1,5 +1,6 @@
-package com.example.puppyfriend.domain;
+package com.example.puppyfriend.follow.domain;
 
+import com.example.puppyfriend.domain.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

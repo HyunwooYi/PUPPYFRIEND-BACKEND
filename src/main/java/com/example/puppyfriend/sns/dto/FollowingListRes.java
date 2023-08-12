@@ -1,15 +1,11 @@
 package com.example.puppyfriend.sns.dto;
 
-import com.example.puppyfriend.domain.Follow;
-import com.example.puppyfriend.domain.SnsCategory;
-import com.example.puppyfriend.domain.SnsColor;
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.example.puppyfriend.follow.domain.Follow;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
