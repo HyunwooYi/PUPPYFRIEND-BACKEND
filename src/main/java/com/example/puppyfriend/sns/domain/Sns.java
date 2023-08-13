@@ -1,11 +1,21 @@
 package com.example.puppyfriend.sns.domain;
 
+<<<<<<< HEAD
 import com.example.puppyfriend.domain.SnsCategory;
 import com.example.puppyfriend.domain.SnsColor;
 import com.example.puppyfriend.domain.User;
 import lombok.*;
 
 import javax.persistence.*;
+=======
+import com.example.puppyfriend.domain.SnsColor;
+import com.example.puppyfriend.domain.User;
+import com.example.puppyfriend.domain.SnsCategory;
+import lombok.*;
+
+import javax.persistence.*;
+import java.time.LocalDate;
+>>>>>>> f9079ea96f4f42565b3a34f46a20aa3bf99b5805
 import java.time.LocalDateTime;
 
 @Getter
@@ -24,7 +34,11 @@ public class Sns {
 
     private String title;
 
+<<<<<<< HEAD
     @Column(length = 45, nullable = false)
+=======
+    @Column(nullable = false)
+>>>>>>> f9079ea96f4f42565b3a34f46a20aa3bf99b5805
     private String post;
 
     private SnsCategory category;

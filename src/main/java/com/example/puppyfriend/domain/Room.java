@@ -15,5 +15,5 @@ public class Room {
     @ManyToOne
     @JoinColumn(name = "userIdx2")
     private User user2;
-    private Timestamp create_at;
+    private Timestamp createAt;
 }

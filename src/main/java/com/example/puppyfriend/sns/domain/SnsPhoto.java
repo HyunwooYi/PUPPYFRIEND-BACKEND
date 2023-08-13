@@ -1,5 +1,9 @@
 package com.example.puppyfriend.sns.domain;
 
+<<<<<<< HEAD
+=======
+import com.example.puppyfriend.sns.domain.Sns;
+>>>>>>> f9079ea96f4f42565b3a34f46a20aa3bf99b5805
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
