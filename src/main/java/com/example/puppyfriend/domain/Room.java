@@ -1,18 +1,19 @@
 package com.example.puppyfriend.domain;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Entity
 public class Room {
 
     @Id @GeneratedValue
-    private int room_id;
+    private int roomIdx;
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userIdx")
     private User user;
     @ManyToOne
-    @JoinColumn(name = "user_id2")
+    @JoinColumn(name = "userIdx2")
     private User user2;
     private Timestamp create_at;
 }
