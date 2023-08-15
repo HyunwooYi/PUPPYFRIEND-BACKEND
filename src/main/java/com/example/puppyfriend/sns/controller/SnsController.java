@@ -22,8 +22,8 @@ public class SnsController {
     //게시글 작성
     @ResponseBody
     @PostMapping("/post")
-    @ApiOperation(value="게시글 작성", notes="category: 'Question'/'Worry'/null 세 개 중 한가지로 받아옵니다. \n " +
-            "color: 'Blue'/'Green'/'Red'/'Yellow'/'Pink' 중 한가지로 받아옵니다. \n " +
+    @ApiOperation(value="게시글 작성", notes="category: 'Question' / 'Worry' / null 세 개 중 한가지로 받아옵니다. \n " +
+            "color: 'Blue' / 'Green' / 'Red' / 'Yellow' / 'Pink' 중 한가지로 받아옵니다. \n " +
             "title: string이나 null 값으로 받아옵니다.\n" +
             "userIdx: 유저의 userIdx 번호와 함께 주셔야합니다.")
     public BaseResponse<String> createSnsPost(@RequestBody PostReq postReq) {
