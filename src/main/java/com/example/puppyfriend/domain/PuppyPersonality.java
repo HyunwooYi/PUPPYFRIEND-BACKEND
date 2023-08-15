@@ -1,5 +1,10 @@
 package com.example.puppyfriend.domain;
 
 public enum PuppyPersonality {
-    QUIET
+    QUIET,
+    LAZY,
+    SHY,
+    ACTIVE,
+    LOVE,
+    FRIEND
 }
