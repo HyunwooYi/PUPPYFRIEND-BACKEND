@@ -111,7 +111,7 @@ public class SnsController {
 
     //둘러보기 - 검색
     @ResponseBody
-    @GetMapping("/search")
+    @PostMapping("/search")
     @ApiOperation(value="검색", notes="키워드와 나이, 성격, 크기, 종을 통한 게시물 검색 api입니다.")
     public BaseResponse<List<GetPostRes.SnsInfo>> searchSnsByConditions(@RequestBody SearchReq searchReq) {
         try {
