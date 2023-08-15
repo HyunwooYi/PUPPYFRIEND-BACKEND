@@ -1,5 +1,7 @@
 package com.example.puppyfriend.domain;
 
+import com.example.puppyfriend.user.domain.User;
+
 import javax.persistence.*;
 
 @Entity

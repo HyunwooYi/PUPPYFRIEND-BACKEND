@@ -1,7 +1,7 @@
 package com.example.puppyfriend;
 
 import com.example.puppyfriend.domain.Puppy;
-import com.example.puppyfriend.domain.User;
+import com.example.puppyfriend.user.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 

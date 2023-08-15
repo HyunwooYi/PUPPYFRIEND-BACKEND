@@ -1,9 +1,7 @@
-package com.example.puppyfriend;
+package com.example.puppyfriend.user.repositiory;
 
-import com.example.puppyfriend.domain.User;
+import com.example.puppyfriend.user.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository

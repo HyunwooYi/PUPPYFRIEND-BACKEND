@@ -1,5 +1,6 @@
-package com.example.puppyfriend.domain;
+package com.example.puppyfriend.user.domain;
 
+import com.example.puppyfriend.domain.Puppy;
 import com.example.puppyfriend.follow.domain.Follow;
 import lombok.*;
 
