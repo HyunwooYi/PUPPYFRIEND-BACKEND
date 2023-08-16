@@ -1,20 +1,14 @@
 package com.example.puppyfriend.domain;
 
-<<<<<<< HEAD
-import com.example.puppyfriend.home.domain.Puppy;
-import lombok.Getter;
-import lombok.Setter;
-
-import javax.persistence.*;
-import java.time.LocalDate;
-import java.util.ArrayList;
-=======
 import com.example.puppyfriend.follow.domain.Follow;
+import com.example.puppyfriend.home.domain.Puppy;
+import com.example.puppyfriend.home.domain.Walk;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
->>>>>>> f9079ea96f4f42565b3a34f46a20aa3bf99b5805
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -22,7 +16,6 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 @Entity
-@Getter @Setter
 public class User {
 
     @Id @GeneratedValue
@@ -44,23 +37,21 @@ public class User {
     private String location;
     @Column(length = 45)
     private String accessToken;
-<<<<<<< HEAD
     private int status; // 1(모두에게 보이기), 0(모두에게 숨기기)
 
-//    // User와 Puppy 간의 양방향 관계 설정
-//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<Puppy> puppies = new ArrayList<>();
-=======
-    private int status;
-
     @OneToMany(mappedBy = "follower")
+    @JsonIgnore
     private List<Follow> followingList;
 
     @OneToMany(mappedBy = "following")
+    @JsonIgnore
     private List<Follow> followerList;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Puppy puppy;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Walk> walks = new ArrayList<>();
 
     public void setUserIdx(int userIdx) {
         this.userIdx = userIdx;
@@ -68,12 +59,10 @@ public class User {
 
     @Builder
     public User(int userIdx, String id, String password, String nickname,
-               String name, String email, Boolean gender, LocalDate birth, String location, String accessToken, int status){
+                String name, String email, Boolean gender, LocalDate birth, String location, String accessToken, int status){
         this.userIdx = userIdx;
         this.id = id;
         this.password = password;
         this.nickname = nickname;
     }
->>>>>>> f9079ea96f4f42565b3a34f46a20aa3bf99b5805
-
 }

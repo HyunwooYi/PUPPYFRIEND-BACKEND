@@ -1,25 +1,20 @@
 package com.example.puppyfriend.walk.service;
 
-import com.example.puppyfriend.FollowRepository;
 import com.example.puppyfriend.UserRepository;
-import com.example.puppyfriend.domain.Follow;
 import com.example.puppyfriend.domain.User;
+import com.example.puppyfriend.follow.repository.FollowRepository;
 import com.example.puppyfriend.home.domain.Puppy;
-import com.example.puppyfriend.home.repository.PuppyRepository;
-import com.example.puppyfriend.sns.domain.Sns;
-import com.example.puppyfriend.sns.dto.PostReq;
+import com.example.puppyfriend.home.repository.PuppyRepositoryHome;
 import com.example.puppyfriend.util.BaseException;
 import com.example.puppyfriend.util.BaseResponse;
 import com.example.puppyfriend.util.BaseResponseStatus;
 import com.example.puppyfriend.walk.dto.GetUserRangeAll;
-import com.example.puppyfriend.walk.dto.GetUserRangeHide;
 import com.example.puppyfriend.walk.dto.GetUserRangeMyPuppyFriend;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +25,7 @@ public class WalkService {
 
     @Autowired
     private final UserRepository userRepository;
-    private final PuppyRepository puppyRepository;
+    private final PuppyRepositoryHome puppyRepository;
     private final FollowRepository followRepository;
 
 

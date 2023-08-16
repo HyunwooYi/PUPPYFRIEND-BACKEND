@@ -1,43 +1,33 @@
 package com.example.puppyfriend.follow.domain;
 
 import com.example.puppyfriend.domain.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import lombok.Getter;
-import lombok.Setter;
-
-<<<<<<< HEAD:src/main/java/com/example/puppyfriend/domain/Follow.java
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Getter
 @Setter
-=======
-@Getter
-@Setter
-@ToString
 @NoArgsConstructor
->>>>>>> f9079ea96f4f42565b3a34f46a20aa3bf99b5805:src/main/java/com/example/puppyfriend/follow/domain/Follow.java
 @Entity
 public class Follow {
 
     @Id
     @GeneratedValue
     private int followIdx;
-<<<<<<< HEAD:src/main/java/com/example/puppyfriend/domain/Follow.java
-
-    private int roomIdx;
-=======
->>>>>>> f9079ea96f4f42565b3a34f46a20aa3bf99b5805:src/main/java/com/example/puppyfriend/follow/domain/Follow.java
 
     @ManyToOne
     @JoinColumn(name = "follower")
+    @JsonBackReference("user-following")
     private User follower;
 
     @ManyToOne
     @JoinColumn(name = "following")
+    @JsonBackReference("user-follower")
     private User following;
 
 }

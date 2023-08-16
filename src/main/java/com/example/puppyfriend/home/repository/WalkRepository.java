@@ -14,10 +14,10 @@ import java.util.List;
 @EnableJpaRepositories
 public interface WalkRepository extends JpaRepository<Walk, Integer> {
 
-    @Query("SELECT NEW com.example.puppyfriend.home.dto.GetWalkReviewRes(" +
-            "w.date, w.photo, w.review) " +
-            "FROM Walk w JOIN w.user u WHERE w.user.userIdx = :userId")
-    List<GetWalkReviewRes> getWalkReviewByUser(@Param("userId") int userId);
+//    @Query("SELECT NEW com.example.puppyfriend.home.dto.GetWalkReviewRes(" +
+//            "w.date, w.photo, w.review) " +
+//            "FROM Walk w JOIN w.user u WHERE w.user.userIdx = :userId")
+//    List<GetWalkReviewRes> getWalkReviewByUser(@Param("userId") int userId);
 
 
 

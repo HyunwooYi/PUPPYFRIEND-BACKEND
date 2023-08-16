@@ -6,10 +6,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-<<<<<<< HEAD
-
-=======
->>>>>>> f9079ea96f4f42565b3a34f46a20aa3bf99b5805
 import static com.example.puppyfriend.util.BaseResponseStatus.SUCCESS;
 
 @Getter

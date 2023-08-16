@@ -11,7 +11,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 @EnableJpaRepositories
-public interface PuppyRepository extends JpaRepository<Puppy, Integer> {
+public interface PuppyRepositoryHome extends JpaRepository<Puppy, Integer> {
 
     @Query("SELECT NEW com.example.puppyfriend.home.dto.GetHomeRes(" +
             "u.nickname, p.name, p.type, p.birth, p.sex, p.goal) " +
