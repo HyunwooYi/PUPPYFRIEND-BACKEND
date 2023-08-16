@@ -13,7 +13,7 @@ import java.util.List;
 
 @Getter
 @Setter
-@ToString
+@ToString(exclude = {"puppy"})
 @NoArgsConstructor
 @Entity
 public class User {

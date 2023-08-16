@@ -13,7 +13,7 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-@ToString
+@ToString(exclude = {"user"})
 @NoArgsConstructor
 @Entity
 public class Puppy {

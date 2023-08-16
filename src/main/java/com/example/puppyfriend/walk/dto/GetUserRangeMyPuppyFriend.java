@@ -37,7 +37,7 @@ public class GetUserRangeMyPuppyFriend {
             this.type = mainPuppy.getType();
             this.birth = mainPuppy.getBirth();
             this.sex = mainPuppy.getSex();
-//            this.personality = mainPuppy.getPersonality();
+            this.personality = mainPuppy.getPersonality();
 
         }
     }
