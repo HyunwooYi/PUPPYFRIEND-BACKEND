@@ -13,4 +13,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 //            "LEFT JOIN FETCH u.followerList follower " +
 //            "WHERE u.userIdx = :userIdx")
 //    User findUserWithRelatedTables(@Param("userIdx") int userIdx);
+
+    //
+    User findByUid(String uid); // 자동으로 해준대
 }
