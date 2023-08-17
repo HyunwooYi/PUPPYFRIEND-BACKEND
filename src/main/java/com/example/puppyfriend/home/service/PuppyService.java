@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -91,26 +92,41 @@ public class PuppyService {
 
     // 홈 산책리뷰 작성
     @Transactional
-    public BaseResponse<Walk> homeWalkReview(WalkReviewReq walkReviewReq, int userIdx) throws BaseException {
+    public BaseResponse<String> homeWalkReviewList(WalkReviewReq walkReviewReq, int userIdx) throws BaseException {
         try {
-            User user = userRepositoryHome.findById(userIdx).orElseThrow(() -> new BaseException(BaseResponseStatus.USER_NOT_FOUND));
-            Walk walk = new Walk();
-            LocalDate currentDate = LocalDate.now();
+            User user = userRepositoryHome.findById(walkReviewReq.getUserIdx())
+                    .orElseThrow(() -> new BaseException(BaseResponseStatus.USER_NOT_FOUND));
 
-            for (int i = 0; i < 31; i++) {
-                LocalDate selectedDate = currentDate.plusDays(i);
+            for (WalkReviewReq.WalkReviewData reviewData : walkReviewReq.getWalkReviews()) {
+                LocalDate requestedDate = reviewData.getDate();
+                Walk existingWalk = walkRepository.findByDateAndUser(requestedDate, user);
 
-                WalkReview walkReview = new WalkReview();
-                walkReview.setPhoto(walkReviewReq.getPhoto());
-                walkReview.setReview(walkReviewReq.getReview());
-                walk.setDate(selectedDate);
+                if (existingWalk != null) {
+                    // 이미 해당 날짜의 Walk 엔티티가 존재하는 경우
+                    WalkReview walkReview = new WalkReview();
+                    walkReview.setPhoto(reviewData.getPhoto());
+                    walkReview.setReview(reviewData.getReview());
+                    walkReview.setWalk(existingWalk);
 
-                walk.setUser(user);
+                    existingWalk.getWalkDataList().add(walkReview);
+                } else {
+                    // 해당 날짜의 Walk 엔티티가 존재하지 않는 경우
+                    Walk newWalk = new Walk();
+                    newWalk.setDate(requestedDate);
+                    newWalk.setUser(user);
 
-                walkRepository.save(walk);
+                    WalkReview walkReview = new WalkReview();
+                    walkReview.setPhoto(reviewData.getPhoto());
+                    walkReview.setReview(reviewData.getReview());
+                    walkReview.setWalk(newWalk);
+
+                    newWalk.getWalkDataList().add(walkReview);
+
+                    walkRepository.save(newWalk);
+                }
             }
 
-            return new BaseResponse<>(walk);
+            return new BaseResponse<>("Walk reviews saved successfully.");
         } catch (IllegalArgumentException e) {
             return new BaseResponse<>(BaseResponseStatus.INTERNAL_SERVER_ERROR);
         }
@@ -135,20 +151,30 @@ public class PuppyService {
     }
 
 
-//    // 홈 산책 리뷰 전달
-//    public BaseResponse<List<GetWalkReviewRes>> getHomeWalkReview(int userIdx) throws BaseException {
-//        try {
-//            User user = userRepositoryHome.findById(userIdx)
-//                    .orElseThrow(() -> new BaseException(BaseResponseStatus.USER_NOT_FOUND));
-//
-//            List<GetWalkReviewRes> result = walkRepository.getWalkReviewByUser(userIdx);
-//
-//            return new BaseResponse<>(result);
-//
-//        } catch (IllegalArgumentException e) {
-//            // 유효성 검증 실패 시 발생하는 예외
-//            return new BaseResponse<>(BaseResponseStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
+    // 산책 리뷰 전달
+    public GetWalkReviewRes getWalkReviewInfo(int userIdx) {
+        try {
+            User user = userRepositoryHome.findById(userIdx)
+                    .orElseThrow(() -> new BaseException(BaseResponseStatus.USER_NOT_FOUND));
+
+            List<WalkReview> walkReviews = walkRepository.getWalkReviewByUser(userIdx);
+            List<GetWalkReviewRes.WalkReviewData> result = new ArrayList<>();
+
+            for (WalkReview walkReview : walkReviews) {
+                GetWalkReviewRes.WalkReviewData reviewData = new GetWalkReviewRes.WalkReviewData();
+                reviewData.setDate(walkReview.getWalk().getDate());
+                reviewData.setPhoto(walkReview.getPhoto());
+                reviewData.setReview(walkReview.getReview());
+                result.add(reviewData);
+            }
+
+            return new GetWalkReviewRes(userIdx, result);
+
+        } catch (IllegalArgumentException e) {
+            return new GetWalkReviewRes(userIdx, new ArrayList<>());
+        } catch (BaseException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }
