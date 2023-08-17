@@ -1,6 +1,7 @@
 package com.example.puppyfriend.follow.domain;
 
 import com.example.puppyfriend.domain.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,7 +12,6 @@ import java.sql.Timestamp;
 
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @Entity
 public class Follow {
@@ -22,10 +22,12 @@ public class Follow {
 
     @ManyToOne
     @JoinColumn(name = "follower")
+    @JsonBackReference("user-following")
     private User follower;
 
     @ManyToOne
     @JoinColumn(name = "following")
+    @JsonBackReference("user-follower")
     private User following;
 
 }

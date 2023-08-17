@@ -26,16 +26,16 @@ public interface SnsRepository extends JpaRepository<Sns, Integer> {
     List<Sns> findSnsByCategory(SnsCategory category);
 
     //둘러보기 - 검색
-    @Query("SELECT s FROM Sns s " +
-            "WHERE (:keyword IS NULL OR s.userIdx.puppy.name = :keyword) " +
-            "AND (:puppyType IS NULL OR s.userIdx.puppy.type = :puppyType) " +
-            "AND (:puppyAge IS NULL OR s.userIdx.puppy.age = :puppyAge) " +
-            "AND (:puppySize IS NULL OR s.userIdx.puppy.size = :puppySize) " +
-            "AND (:puppyPersonality IS NULL OR s.userIdx.puppy.personality = :puppyPersonality)")
-    List<Sns> searchSnsByConditions(@Param("keyword") String keyword,
-                                    @Param("puppyType") PuppyType puppyType,
-                                    @Param("puppyAge") PuppyAge puppyAge,
-                                    @Param("puppySize") PuppySize puppySize,
-                                    @Param("puppyPersonality") PuppyPersonality puppyPersonality);
+//    @Query("SELECT s FROM Sns s " +
+//            "WHERE (:keyword IS NULL OR s.userIdx.puppy.name = :keyword) " +
+//            "AND (:puppyType IS NULL OR s.userIdx.puppy.type = :puppyType) " +
+//            "AND (:puppyAge IS NULL OR s.userIdx.puppy.age = :puppyAge) " +
+//            "AND (:puppySize IS NULL OR s.userIdx.puppy.size = :puppySize) " +
+//            "AND (:puppyPersonality IS NULL OR s.userIdx.puppy.personality = :puppyPersonality)")
+//    List<Sns> searchSnsByConditions(@Param("keyword") String keyword,
+//                                    @Param("puppyType") PuppyType puppyType,
+//                                    @Param("puppyAge") PuppyAge puppyAge,
+//                                    @Param("puppySize") PuppySize puppySize,
+//                                    @Param("puppyPersonality") PuppyPersonality puppyPersonality);
 
 }

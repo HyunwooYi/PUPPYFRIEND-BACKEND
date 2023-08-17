@@ -22,7 +22,15 @@ public enum BaseResponseStatus {
     PUPPY_NOT_FOUND(false, 4782, "해당하는 퍼프 정보가 없습니다."),
 
     INTERNAL_SERVER_ERROR(false, 5000, "토큰을 확인해주세요."),
+
+    /*
+     * 6000: [HOME]
+     * */
+    USER_NOT_FOUND(false, 6000, "해당하는 유저 정보가 없습니다."),
+    WALK_REVIEW_NOT_SAVE(false, 6001, "산책 리뷰가 저장되지 않았습니다."),
+    DATA_NOT_FOUND(false, 6002, "puppy_personality 가 비어있습니다.")
     ;
+
 
     private final boolean isSuccess;
     private final int code;

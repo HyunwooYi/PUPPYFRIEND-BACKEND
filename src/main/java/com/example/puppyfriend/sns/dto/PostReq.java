@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PostReq {
-//    @ApiModelProperty(example = "프로필 아이디")
+    //    @ApiModelProperty(example = "프로필 아이디")
     private int userIdx;
 
     private String title;

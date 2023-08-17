@@ -25,4 +25,8 @@ public interface FollowRepository extends JpaRepository<Follow, Integer> {
     List<Follow> findByFollowerUserIdx(int followerUserIdx);
 
     List<Follow> findByFollowingUserIdx(int followingUserIdx);
+
+    @Query("SELECT f.following From Follow f WHERE f.following.status != 0 and f.follower.userIdx = :userId")
+    List<User> findFollowingByUserIdx(@Param("userId") int userId);
+
 }

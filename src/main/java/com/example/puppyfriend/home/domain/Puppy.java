@@ -1,17 +1,19 @@
-package com.example.puppyfriend.domain;
+package com.example.puppyfriend.home.domain;
 
+import com.example.puppyfriend.domain.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 
 @Getter
 @Setter
-@ToString
+@ToString(exclude = {"user"})
 @NoArgsConstructor
 @Entity
 public class Puppy {
@@ -20,16 +22,19 @@ public class Puppy {
     @GeneratedValue
     private int puppyIdx;
 
-    @OneToOne
+    @ManyToOne // (fetch = FetchType.LAZY)
     @JoinColumn(name = "userIdx")
+    @JsonBackReference("user-puppy")
     private User user;
 
     private LocalDate birth;
-
     private int goal;
 
     @Column(length = 45)
     private String name;
+
+    @Column(length = 45)
+    private String detailType;
 
     @Enumerated(EnumType.STRING)
     private PuppyType type;
@@ -45,6 +50,7 @@ public class Puppy {
 
     @Enumerated(EnumType.STRING)
     private PuppyPersonality personality;
+
 
 
 }

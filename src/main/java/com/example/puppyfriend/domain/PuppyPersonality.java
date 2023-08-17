@@ -7,4 +7,5 @@ public enum PuppyPersonality {
     ACTIVE,
     LOVE,
     FRIEND
+
 }

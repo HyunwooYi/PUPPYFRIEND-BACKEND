@@ -1,15 +1,19 @@
 package com.example.puppyfriend.domain;
 
 import com.example.puppyfriend.follow.domain.Follow;
+import com.example.puppyfriend.home.domain.Puppy;
+import com.example.puppyfriend.home.domain.Walk;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Setter
-@ToString
+@ToString(exclude = {"puppy"})
 @NoArgsConstructor
 @Entity
 public class User {
@@ -33,16 +37,21 @@ public class User {
     private String location;
     @Column(length = 45)
     private String accessToken;
-    private int status;
+    private int status; // 1(모두에게 보이기), 0(모두에게 숨기기)
 
     @OneToMany(mappedBy = "follower")
+    @JsonIgnore
     private List<Follow> followingList;
 
     @OneToMany(mappedBy = "following")
+    @JsonIgnore
     private List<Follow> followerList;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Puppy puppy;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Walk> walks = new ArrayList<>();
 
     public void setUserIdx(int userIdx) {
         this.userIdx = userIdx;
@@ -50,11 +59,10 @@ public class User {
 
     @Builder
     public User(int userIdx, String id, String password, String nickname,
-               String name, String email, Boolean gender, LocalDate birth, String location, String accessToken, int status){
+                String name, String email, Boolean gender, LocalDate birth, String location, String accessToken, int status){
         this.userIdx = userIdx;
         this.id = id;
         this.password = password;
         this.nickname = nickname;
     }
-
 }

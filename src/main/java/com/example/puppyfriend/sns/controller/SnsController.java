@@ -1,5 +1,7 @@
 package com.example.puppyfriend.sns.controller;
 
+import com.example.puppyfriend.sns.dto.GetUserPostRes;
+import com.example.puppyfriend.sns.dto.PostReq;
 import com.example.puppyfriend.sns.dto.*;
 import com.example.puppyfriend.sns.service.SnsService;
 import com.example.puppyfriend.util.BaseException;
@@ -34,6 +36,7 @@ public class SnsController {
             return new BaseResponse<>(e.getStatus());
         }
     }
+
 
     //게시글 삭제
     @ResponseBody
@@ -123,6 +126,5 @@ public class SnsController {
             return new BaseResponse<>(e.getStatus());
         }
     }
-
 
 }
