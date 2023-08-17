@@ -1,12 +1,11 @@
 package com.example.puppyfriend.sns.domain;
 
 import com.example.puppyfriend.domain.SnsColor;
-import com.example.puppyfriend.domain.User;
+import com.example.puppyfriend.user.domain.User;
 import com.example.puppyfriend.domain.SnsCategory;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter

@@ -1,6 +1,6 @@
 package com.example.puppyfriend.follow.service;
 
-import com.example.puppyfriend.domain.User;
+import com.example.puppyfriend.user.domain.User;
 import com.example.puppyfriend.follow.domain.Follow;
 import com.example.puppyfriend.follow.repository.FollowRepository;
 import com.example.puppyfriend.util.BaseException;

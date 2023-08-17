@@ -1,11 +1,11 @@
 package com.example.puppyfriend.home.domain;
 
+import com.example.puppyfriend.user.domain.User;
 import com.example.puppyfriend.domain.*;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
-import lombok.Setter;
-
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
@@ -22,7 +22,7 @@ public class Puppy {
     @GeneratedValue
     private int puppyIdx;
 
-    @ManyToOne // (fetch = FetchType.LAZY)
+    @OneToOne // (fetch = FetchType.LAZY)
     @JoinColumn(name = "userIdx")
     @JsonBackReference("user-puppy")
     private User user;
@@ -50,7 +50,6 @@ public class Puppy {
 
     @Enumerated(EnumType.STRING)
     private PuppyPersonality personality;
-
 
 
 }

@@ -1,8 +1,9 @@
 package com.example.puppyfriend.domain;
 
+import com.example.puppyfriend.user.domain.User;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 @Entity
 public class Room {

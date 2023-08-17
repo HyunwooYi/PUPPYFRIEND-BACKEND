@@ -1,6 +1,6 @@
 package com.example.puppyfriend.home.service;
 
-import com.example.puppyfriend.domain.User;
+import com.example.puppyfriend.user.domain.User;
 import com.example.puppyfriend.domain.WalkReview;
 import com.example.puppyfriend.home.domain.Puppy;
 import com.example.puppyfriend.home.domain.Walk;

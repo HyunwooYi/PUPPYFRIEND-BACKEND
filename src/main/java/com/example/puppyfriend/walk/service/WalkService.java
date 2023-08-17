@@ -1,10 +1,12 @@
 package com.example.puppyfriend.walk.service;
 
-import com.example.puppyfriend.UserRepository;
-import com.example.puppyfriend.domain.User;
+
 import com.example.puppyfriend.follow.repository.FollowRepository;
 import com.example.puppyfriend.home.domain.Puppy;
 import com.example.puppyfriend.home.repository.PuppyRepositoryHome;
+
+import com.example.puppyfriend.user.domain.User;
+import com.example.puppyfriend.user.repositiory.UserRepository;
 import com.example.puppyfriend.util.BaseException;
 import com.example.puppyfriend.util.BaseResponse;
 import com.example.puppyfriend.util.BaseResponseStatus;
