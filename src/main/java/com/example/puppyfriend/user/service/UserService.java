@@ -61,6 +61,7 @@ public class UserService {
                 .gender(userJoinDto.getGender())
                 //.provider("local") // 카카오로그인 하면 카카오 찍힌대
                 .location(userJoinDto.getLocation())
+                .marketing(userJoinDto.getMarketing())
                 .build();
 
         if(userRepository.findByUid(user.getUid()) != null){ // 아이디 중복확인

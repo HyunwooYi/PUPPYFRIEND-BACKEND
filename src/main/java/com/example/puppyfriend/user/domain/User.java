@@ -37,6 +37,7 @@ public class User {
     @Column(length = 45)
     private String accessToken;
     private int status;
+    private Boolean marketing;
 
     @Column(name = "create_At") // 타임찍힘
     @CreationTimestamp
@@ -61,7 +62,8 @@ public class User {
 
     @Builder
     public User(int userIdx, String uid, String password, String nickname,
-               String name, String email, Boolean gender, LocalDate birth, String location, String accessToken, int status){
+               String name, String email, Boolean gender, LocalDate birth,
+                String location, String accessToken, int status, Boolean marketing){
         this.userIdx = userIdx;
         this.uid = uid;
         this.password = password;
@@ -73,6 +75,7 @@ public class User {
         this.location = location;
         this.accessToken = accessToken;
         this.status = status;
+        this.marketing = marketing;
     }
 
 }

@@ -20,5 +20,6 @@ public class UserJoinDto { // 도메인과 비슷하게 만들면 된대
     private Boolean gender;
     private String location;
     private String email;
+    private Boolean marketing;
 
 }
