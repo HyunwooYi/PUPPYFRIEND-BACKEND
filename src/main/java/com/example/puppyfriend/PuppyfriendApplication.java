@@ -1,6 +1,6 @@
 package com.example.puppyfriend;
 
-import com.example.puppyfriend.domain.User;
+import com.example.puppyfriend.user.domain.User;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

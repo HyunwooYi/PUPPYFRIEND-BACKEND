@@ -1,6 +1,7 @@
 package com.example.puppyfriend.walk.controller;
 
-import com.example.puppyfriend.domain.User;
+
+import com.example.puppyfriend.user.domain.User;
 import com.example.puppyfriend.util.BaseException;
 import com.example.puppyfriend.util.BaseResponse;
 import com.example.puppyfriend.walk.dto.GetUserRangeAll;

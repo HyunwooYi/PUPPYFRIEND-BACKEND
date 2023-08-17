@@ -1,6 +1,6 @@
 package com.example.puppyfriend.home.dto;
 
-import com.example.puppyfriend.domain.User;
+import com.example.puppyfriend.user.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

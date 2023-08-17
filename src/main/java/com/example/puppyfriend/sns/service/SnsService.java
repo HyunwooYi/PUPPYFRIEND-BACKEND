@@ -2,11 +2,11 @@ package com.example.puppyfriend.sns.service;
 
 import com.example.puppyfriend.follow.repository.FollowRepository;
 import com.example.puppyfriend.PuppyRepository;
-import com.example.puppyfriend.UserRepository;
+import com.example.puppyfriend.user.repositiory.UserRepository;
 import com.example.puppyfriend.follow.domain.Follow;
 import com.example.puppyfriend.domain.SnsCategory;
-import com.example.puppyfriend.domain.User;
 import com.example.puppyfriend.home.domain.Puppy;
+import com.example.puppyfriend.user.domain.User;
 import com.example.puppyfriend.sns.domain.Sns;
 import com.example.puppyfriend.sns.domain.SnsPhoto;
 import com.example.puppyfriend.sns.dto.*;
@@ -214,26 +214,26 @@ public class SnsService {
     }
 
     //둘러보기 - 검색
-//    public BaseResponse<List<GetPostRes.SnsInfo>> searchSnsByConditions(SearchReq searchReq) throws BaseException {
-//        try {
-//            List<Sns> snsList = snsRepository.searchSnsByConditions(
-//                    searchReq.getKeyword(),
-//                    searchReq.getPuppyType(),
-//                    searchReq.getPuppyAge(),
-//                    searchReq.getPuppySize(),
-//                    searchReq.getPuppyPersonality());
-//
-//            if (snsList.isEmpty()) {
-//                throw new BaseException(BaseResponseStatus.POST_UNAVAILABLE);
-//            }
-//
-//            List<GetPostRes.SnsInfo> result = convertToGetUserPostResSnsInfo(snsList);
-//
-//            return new BaseResponse<>(result);
-//
-//        } catch (BaseException e) {
-//            return new BaseResponse<>(BaseResponseStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
+    public BaseResponse<List<GetPostRes.SnsInfo>> searchSnsByConditions(SearchReq searchReq) throws BaseException {
+        try {
+            List<Sns> snsList = snsRepository.searchSnsByConditions(
+                    searchReq.getKeyword(),
+                    searchReq.getPuppyType(),
+                    searchReq.getPuppyAge(),
+                    searchReq.getPuppySize(),
+                    searchReq.getPuppyPersonality());
+
+            if (snsList.isEmpty()) {
+                throw new BaseException(BaseResponseStatus.POST_UNAVAILABLE);
+            }
+
+            List<GetPostRes.SnsInfo> result = convertToGetUserPostResSnsInfo(snsList);
+
+            return new BaseResponse<>(result);
+
+        } catch (BaseException e) {
+            return new BaseResponse<>(BaseResponseStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 }

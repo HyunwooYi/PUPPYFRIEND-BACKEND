@@ -3,7 +3,7 @@ package com.example.puppyfriend.walk.dto;
 import com.example.puppyfriend.domain.PuppyPersonality;
 import com.example.puppyfriend.domain.PuppySex;
 import com.example.puppyfriend.domain.PuppyType;
-import com.example.puppyfriend.domain.User;
+import com.example.puppyfriend.user.domain.User;
 import com.example.puppyfriend.home.domain.Puppy;
 
 import lombok.AllArgsConstructor;

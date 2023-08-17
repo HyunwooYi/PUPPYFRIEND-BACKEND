@@ -1,6 +1,6 @@
 package com.example.puppyfriend.home.domain;
 
-import com.example.puppyfriend.domain.User;
+import com.example.puppyfriend.user.domain.User;
 import com.example.puppyfriend.domain.WalkReview;
 import lombok.Getter;
 import lombok.Setter;

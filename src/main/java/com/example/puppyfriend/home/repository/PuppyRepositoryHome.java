@@ -1,6 +1,6 @@
 package com.example.puppyfriend.home.repository;
 
-import com.example.puppyfriend.domain.User;
+import com.example.puppyfriend.user.domain.User;
 import com.example.puppyfriend.home.domain.Puppy;
 import com.example.puppyfriend.home.dto.GetHomeRes;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -2,7 +2,7 @@ package com.example.puppyfriend.home.dto;
 
 import com.example.puppyfriend.domain.PuppySex;
 import com.example.puppyfriend.domain.PuppyType;
-import com.example.puppyfriend.domain.User;
+import com.example.puppyfriend.user.domain.User;
 import lombok.Getter;
 import lombok.Setter;
 
