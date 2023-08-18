@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -13,7 +14,16 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class GetWalkReviewRes {
 
-    private LocalDate date;
-    private String photo;
-    private String review;
+    private int userIdx;
+    private List<WalkReviewData> walkReviews;
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class WalkReviewData {
+        private LocalDate date;
+        private String photo;
+        private String review;
+    }
 }

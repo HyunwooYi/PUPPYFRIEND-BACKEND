@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -55,63 +57,29 @@ public class PuppyController {
     //  산책 리뷰 작성
     @ResponseBody
     @PostMapping("/walk-review")
-    public BaseResponse<String> addWalkReview(@PathVariable int userIdx, @RequestBody WalkReviewReq walkReviewReq) {
+    public BaseResponse<String> homeWalkReviewList(@PathVariable int userIdx, @RequestBody WalkReviewReq walkReviewReq) {
         try {
-            puppyService.homeWalkReview(walkReviewReq, userIdx);
+            puppyService.homeWalkReviewList(walkReviewReq, userIdx);
             return new BaseResponse<>("함께한 퍼프친구 작성 완료");
         } catch (BaseException e) {
             return new BaseResponse<>(e.getStatus());
         }
     }
 
-//    @ResponseBody
-//    @GetMapping("")
-//    public BaseResponse<CombinedResponse> getCombinedData(@PathVariable int userIdx) {
-//        try {
-//            BaseResponse<List<GetHomeRes>> homeResponse = puppyService.getHome(userIdx);
-//            BaseResponse<List<GetWalkReviewRes>> walkReviewResponse = puppyService.getHomeWalkReview(userIdx);
-//
-//            if (homeResponse.getResult() != null && walkReviewResponse.getResult() != null) {
-//                List<GetHomeRes> homeResponses = homeResponse.getResult();
-//                List<GetWalkReviewRes> walkReviewResponses = walkReviewResponse.getResult();
-//                CombinedResponse combinedResponse = new CombinedResponse(homeResponses, walkReviewResponses);
-//                return new BaseResponse<>(combinedResponse);
-//            } else {
-//                // 결과가 null인 경우
-//                throw new BaseException(BaseResponseStatus.INTERNAL_SERVER_ERROR);
-//            }
-//        } catch (BaseException e) {
-//            return new BaseResponse<>(e.getStatus());
-//        } catch (Exception e) {
-//            // 다른 예상하지 못한 오류가 발생했을 때
-//            return new BaseResponse<>(BaseResponseStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
-//
-//    // 새로운 응답 클래스
-//    @Setter
-//    @Getter
-//    @NoArgsConstructor
-//    @AllArgsConstructor
-//    class CombinedResponse {
-//
-//        private List<GetHomeRes> homeResponses;
-//        private List<GetWalkReviewRes> walkReviewResponses;
-//
-//    }
-
-
-////     *홈 화면 프로필 정보 전달
-//    @ResponseBody
-//    @GetMapping("")
-//    public BaseResponse<List<GetHomeRes>> getHome(@PathVariable int userIdx){
-//        try {
-//            return puppyService.getHome(userIdx);
-//        } catch (BaseException e) {
-//            return new BaseResponse<>(e.getStatus());
-//        }
-//    }
-//
-//
+    //     *홈 화면 프로필 정보 전달
+    @ResponseBody
+    @GetMapping("/main")
+    public BaseResponse<Map<String, Object>> getCombinedData(@PathVariable int userIdx) {
+        try {
+            List<GetHomeRes> homeData = puppyService.getHome(userIdx).getResult();
+            GetWalkReviewRes walkReviewData = puppyService.getWalkReviewInfo(userIdx);
+            Map<String, Object> response = new HashMap<>();
+            response.put("homeData", homeData);
+            response.put("walkReviewData", walkReviewData);
+            return new BaseResponse<>(response);
+        } catch (BaseException e) {
+            return new BaseResponse<>(e.getStatus());
+        }
+    }
 
 }
