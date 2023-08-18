@@ -69,7 +69,7 @@ public class PuppyService {
             }
             User user = userRepositoryHome.findById(userIdx).orElseThrow(() -> new BaseException(BaseResponseStatus.USER_NOT_FOUND));
             Puppy puppy = puppyRepositoryHome.findById(puppyIdx).orElseThrow(() -> new BaseException(BaseResponseStatus.PUPPY_NOT_FOUND));
-            if(!puppy.getUser().equals(user)) {
+            if (!puppy.getUser().equals(user)) {
                 throw new BaseException(BaseResponseStatus.USER_NOT_FOUND);
             }
 
@@ -103,39 +103,77 @@ public class PuppyService {
 
                 if (existingWalk != null) {
                     // 이미 해당 날짜의 Walk 엔티티가 존재하는 경우
-                    WalkReview walkReview = new WalkReview();
-                    walkReview.setPhoto(reviewData.getPhoto());
-                    walkReview.setReview(reviewData.getReview());
-                    walkReview.setWalk(existingWalk);
+                    List<WalkReview> existingReviews = existingWalk.getWalkDataList();
 
-                    existingWalk.getWalkDataList().add(walkReview);
+                    // 현재 코드에서는 하루에 한 개의 리뷰만 있을 것으로 가정합니다.
+                    if (!existingReviews.isEmpty()) {
+                        WalkReview existingReview = existingReviews.get(0);
+                        existingReview.setPhoto(reviewData.getPhoto());
+                        existingReview.setReview(reviewData.getReview());
+                    } else {
+                        // 이전에 리뷰가 없던 경우 새로운 리뷰를 추가합니다.
+                        WalkReview newReview = new WalkReview();
+                        newReview.setPhoto(reviewData.getPhoto());
+                        newReview.setReview(reviewData.getReview());
+                        newReview.setWalk(existingWalk);
+
+                        existingWalk.getWalkDataList().add(newReview);
+                    }
                 } else {
                     // 해당 날짜의 Walk 엔티티가 존재하지 않는 경우
                     Walk newWalk = new Walk();
                     newWalk.setDate(requestedDate);
                     newWalk.setUser(user);
 
-                    WalkReview walkReview = new WalkReview();
-                    walkReview.setPhoto(reviewData.getPhoto());
-                    walkReview.setReview(reviewData.getReview());
-                    walkReview.setWalk(newWalk);
+                    WalkReview newReview = new WalkReview();
+                    newReview.setPhoto(reviewData.getPhoto());
+                    newReview.setReview(reviewData.getReview());
+                    newReview.setWalk(newWalk);
 
-                    newWalk.getWalkDataList().add(walkReview);
+                    newWalk.getWalkDataList().add(newReview);
 
                     walkRepository.save(newWalk);
                 }
             }
-
-            return new BaseResponse<>("Walk reviews saved successfully.");
+//                if (existingWalk != null) {
+//                    // 이미 해당 날짜의 Walk 엔티티가 존재하는 경우
+//                    WalkReview walkReview = new WalkReview();
+//                    walkReview.setPhoto(reviewData.getPhoto());
+//                    walkReview.setReview(reviewData.getReview());
+//                    walkReview.setWalk(existingWalk);
+//
+//                    existingWalk.getWalkDataList().add(walkReview);
+//                } else {
+//                    // 해당 날짜의 Walk 엔티티가 존재하지 않는 경우
+//                    Walk newWalk = new Walk();
+//                    newWalk.setDate(requestedDate);
+//                    newWalk.setUser(user);
+//
+//                    WalkReview walkReview = new WalkReview();
+//                    walkReview.setPhoto(reviewData.getPhoto());
+//                    walkReview.setReview(reviewData.getReview());
+//                    walkReview.setWalk(newWalk);
+//
+//                    newWalk.getWalkDataList().add(walkReview);
+//
+//                    walkRepository.save(newWalk);
+//                }
+//            }
+//            // 모든 리뷰를 처리한 후, 변경된 Walk 엔터티를 저장합니다.
+//            walkRepository.saveAll(existingWalks);
+//
+//            return new BaseResponse<>("Walk reviews saved successfully.");
         } catch (IllegalArgumentException e) {
             return new BaseResponse<>(BaseResponseStatus.INTERNAL_SERVER_ERROR);
         }
+        return new BaseResponse<>(BaseResponseStatus.SUCCESS);
     }
 
 
 
+
     // 홈 프로필 정보 전달
-    public BaseResponse<List<GetHomeRes>> getHome(int userIdx) throws BaseException {
+    public BaseResponse<List<GetHomeRes>> getHome (int userIdx) throws BaseException {
         try {
             User user = userRepositoryHome.findById(userIdx)
                     .orElseThrow(() -> new BaseException(BaseResponseStatus.USER_NOT_FOUND));
