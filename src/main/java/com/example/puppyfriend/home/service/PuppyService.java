@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -135,34 +136,6 @@ public class PuppyService {
                     walkRepository.save(newWalk);
                 }
             }
-//                if (existingWalk != null) {
-//                    // 이미 해당 날짜의 Walk 엔티티가 존재하는 경우
-//                    WalkReview walkReview = new WalkReview();
-//                    walkReview.setPhoto(reviewData.getPhoto());
-//                    walkReview.setReview(reviewData.getReview());
-//                    walkReview.setWalk(existingWalk);
-//
-//                    existingWalk.getWalkDataList().add(walkReview);
-//                } else {
-//                    // 해당 날짜의 Walk 엔티티가 존재하지 않는 경우
-//                    Walk newWalk = new Walk();
-//                    newWalk.setDate(requestedDate);
-//                    newWalk.setUser(user);
-//
-//                    WalkReview walkReview = new WalkReview();
-//                    walkReview.setPhoto(reviewData.getPhoto());
-//                    walkReview.setReview(reviewData.getReview());
-//                    walkReview.setWalk(newWalk);
-//
-//                    newWalk.getWalkDataList().add(walkReview);
-//
-//                    walkRepository.save(newWalk);
-//                }
-//            }
-//            // 모든 리뷰를 처리한 후, 변경된 Walk 엔터티를 저장합니다.
-//            walkRepository.saveAll(existingWalks);
-//
-//            return new BaseResponse<>("Walk reviews saved successfully.");
         } catch (IllegalArgumentException e) {
             return new BaseResponse<>(BaseResponseStatus.INTERNAL_SERVER_ERROR);
         }
@@ -170,10 +143,8 @@ public class PuppyService {
     }
 
 
-
-
     // 홈 프로필 정보 전달
-    public BaseResponse<List<GetHomeRes>> getHome (int userIdx) throws BaseException {
+    public BaseResponse<List<GetHomeRes>> getHome(int userIdx) throws BaseException {
         try {
             User user = userRepositoryHome.findById(userIdx)
                     .orElseThrow(() -> new BaseException(BaseResponseStatus.USER_NOT_FOUND));
@@ -214,5 +185,25 @@ public class PuppyService {
             throw new RuntimeException(e);
         }
     }
+
+    // 현재 산책 횟수 전달
+//    public GetWalkGoalRes getGoal(int userIdx) throws BaseException {
+//        List<LocalDate> day = walkRepository.getDate(userIdx);
+//        day.size();
+//        System.out.println("*************************************************");
+//        for (LocalDate result : day) {
+//            System.out.println(result);
+//        }
+//        System.out.println("==============================================");
+//        Puppy puppy = puppyRepositoryHome.findById(userIdx)
+//                .orElseThrow(() -> new BaseException(BaseResponseStatus.USER_NOT_FOUND));
+//        int goal = puppy.getGoal();
+//
+//        if (puppy.getGoal() /    day.size()) {
+//
+//        }
+//
+//    }
+
 
 }
