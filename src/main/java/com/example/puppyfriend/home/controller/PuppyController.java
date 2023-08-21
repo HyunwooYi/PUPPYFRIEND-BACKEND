@@ -1,25 +1,24 @@
 package com.example.puppyfriend.home.controller;
 
-import com.example.puppyfriend.domain.WalkReview;
 import com.example.puppyfriend.home.dto.*;
 import com.example.puppyfriend.home.service.PuppyService;
 import com.example.puppyfriend.util.BaseException;
 import com.example.puppyfriend.util.BaseResponse;
-import com.example.puppyfriend.util.BaseResponseStatus;
 import com.example.puppyfriend.walk.service.WalkService;
 import io.swagger.annotations.ApiOperation;
 import lombok.*;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.example.puppyfriend.util.BaseResponseStatus.DATE_NOT_SAVE;
+
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/home/{userIdx}")
+//@RequestMapping("/api/v1/home/{userIdx}")
+@RequestMapping("home/{userIdx}")
 @ApiOperation(value = "Home api", notes = " 해당 유저의 id를 함께 주셔야합니다. \n")
 public class PuppyController {
 
@@ -91,6 +90,50 @@ public class PuppyController {
             return new BaseResponse<>(e.getStatus());
         }
     }
+
+    // 주간 산책 기록을 위한 초기 날짜 설정
+    @ResponseBody
+    @GetMapping("/weekly-setting")
+    @ApiOperation(value = "주간 산책 기록 날짜 설정", notes = "우선 8/1 부터 9/30일의 기간을 설정했습니다.")
+    public BaseResponse<String> insertWeeklyWalkRecords(@PathVariable int userIdx) throws BaseException {
+        try {
+            puppyService.insertWeeklyWalkRecords(userIdx);
+            return new BaseResponse<>("주간 산책 기록 초기 날짜 설정");
+        } catch (Exception e){
+            return new BaseResponse<>(DATE_NOT_SAVE);
+        }
+    }
+
+
+    // 주간 산책 기록 작성
+    @ResponseBody
+    @PostMapping("/weekly-walk-record")
+    @ApiOperation(value = "주간 산책 기록 작성", notes = "산책 날짜, 시간, 분 , 거리, 사진을 받습니다.")
+    public BaseResponse<String> weeklyWalkReviewReq(@PathVariable int userIdx, @RequestBody WeeklyWalkRecordReq weeklyWalkRecordReq) {
+        try {
+            puppyService.weeklyWalkReviewReq(weeklyWalkRecordReq, userIdx);
+            return new BaseResponse<>("주간 산책 기록 작성 완료");
+        } catch (BaseException e) {
+            System.out.println("망한것");
+            return new BaseResponse<>(e.getStatus());
+        }
+    }
+
+    // 주간 산책 기록 반환
+    @ResponseBody
+    @GetMapping("/weekly-walk-record/all")
+    @ApiOperation(value = "주간 산책 기록 반환", notes = "산책 기록 반환")
+    public BaseResponse<List<GetWeeklyWalkRecordRes>> getWeekly(@PathVariable int userIdx) {
+        try {
+            List<GetWeeklyWalkRecordRes> result = puppyService.getWalkReviewRes(userIdx);
+            return new BaseResponse<>(result);
+        } catch (BaseException e) {
+            return new BaseResponse<>(e.getStatus());
+        }
+    }
+
+
+
 
 //    @ResponseBody
 //    @GetMapping("/main/goal")

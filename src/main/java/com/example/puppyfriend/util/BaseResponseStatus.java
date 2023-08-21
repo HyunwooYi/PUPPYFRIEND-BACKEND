@@ -32,7 +32,10 @@ public enum BaseResponseStatus {
      * */
     USER_NOT_FOUND(false, 6000, "해당하는 유저 정보가 없습니다."),
     WALK_REVIEW_NOT_SAVE(false, 6001, "산책 리뷰가 저장되지 않았습니다."),
-    DATA_NOT_FOUND(false, 6002, "puppy_personality 가 비어있습니다.")
+    DATA_NOT_FOUND(false, 6002, "puppy_personality 가 비어있습니다."),
+    DATE_NOT_SAVE(false, 6003, "날짜가 생성이 되지 않았습니다."),
+    WEEKLY_WALK_RECORD_NOT_SAVE(false, 6004, "주간 산책 기록이 작성되지 않았습니다."),
+    NO_WEEKLY_WALK_RECORD(false, 6005, "db에 주간 산책 기록이 없습니다.")
     ;
 
 
