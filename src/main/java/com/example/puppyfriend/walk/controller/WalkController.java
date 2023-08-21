@@ -15,7 +15,8 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/walk/{userIdx}")
+//@RequestMapping("/api/v1/walk/{userIdx}")
+@RequestMapping("walk/{userIdx}")
 @ApiOperation(value = "Walk api", notes = "해당 유저의 id를 함께 주셔야합니다.\n")
 public class WalkController {
 
