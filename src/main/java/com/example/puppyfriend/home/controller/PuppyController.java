@@ -37,6 +37,7 @@ public class PuppyController {
             puppyService.savePuppyInform(registerReq1, userIdx);
             return new BaseResponse<>("초기정보_1 저장 완료");
         } catch (BaseException e) {
+            System.out.println("===============여기로 나옴======");
             return new BaseResponse<>(e.getStatus());
         }
     }

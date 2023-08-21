@@ -21,6 +21,7 @@ import java.util.List;
 public class GetUserRangeMyPuppyFriend {
 
     // 유저 위치, 닉네임
+    private int userIdx;
     private String location;
     private String nickname;
 
@@ -45,6 +46,7 @@ public class GetUserRangeMyPuppyFriend {
         List<GetUserRangeMyPuppyFriend> result = new ArrayList<>();
         for (User user : userList) {
             GetUserRangeMyPuppyFriend userRangeMyPuppyFriend = new GetUserRangeMyPuppyFriend();
+            userRangeMyPuppyFriend.setUserIdx(user.getUserIdx());
             userRangeMyPuppyFriend.setLocation(user.getLocation());
             userRangeMyPuppyFriend.setNickname(user.getNickname());
             result.add(userRangeMyPuppyFriend);
