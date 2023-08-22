@@ -35,7 +35,8 @@ public enum BaseResponseStatus {
     DATA_NOT_FOUND(false, 6002, "puppy_personality 가 비어있습니다."),
     DATE_NOT_SAVE(false, 6003, "날짜가 생성이 되지 않았습니다."),
     WEEKLY_WALK_RECORD_NOT_SAVE(false, 6004, "주간 산책 기록이 작성되지 않았습니다."),
-    NO_WEEKLY_WALK_RECORD(false, 6005, "db에 주간 산책 기록이 없습니다.")
+    NO_WEEKLY_WALK_RECORD(false, 6005, "db에 주간 산책 기록이 없습니다."),
+    WRONG_DATE(false, 6006, "currentDate 값이 null 입니다.")
     ;
 
 

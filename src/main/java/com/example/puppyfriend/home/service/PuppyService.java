@@ -2,6 +2,7 @@ package com.example.puppyfriend.home.service;
 
 import com.example.puppyfriend.domain.WeeklyWalkRecord;
 import com.example.puppyfriend.home.repository.WeeklyWalkRecordRepository;
+import com.example.puppyfriend.sns.domain.Sns;
 import com.example.puppyfriend.user.domain.User;
 import com.example.puppyfriend.domain.WalkReview;
 import com.example.puppyfriend.home.domain.Puppy;
@@ -11,6 +12,7 @@ import com.example.puppyfriend.home.repository.PuppyRepositoryHome;
 import com.example.puppyfriend.home.repository.WalkRepository;
 import com.example.puppyfriend.util.BaseException;
 import com.example.puppyfriend.util.BaseResponse;
+import com.example.puppyfriend.util.BaseResponseStatus;
 import com.example.puppyfriend.walk.repository.UserRepositoryHome;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -267,6 +269,35 @@ public class PuppyService {
         }
         return (List<GetWeeklyWalkRecordRes>) new BaseException(NO_WEEKLY_WALK_RECORD); // 예외를 발생시킴
     }
+
+    // 주간 산책 기록 삭제
+    @Transactional
+    public BaseResponse<WeeklyWalkRecord> deleteWeeklyWalkRecord(WeeklyWalkRecordReq weeklyWalkRecordReq,int userIdx) throws BaseException {
+        try {
+
+            LocalDate currentDate = weeklyWalkRecordReq.getDate();
+            if (currentDate == null) {
+                throw new BaseException(BaseResponseStatus.WRONG_DATE);
+            }
+
+
+            WeeklyWalkRecord walkRecord = weeklyWalkRecordRepository.findByUserAndDate(currentDate, userIdx);
+
+//            WeeklyWalkRecord weeklyWalkRecord = weeklyWalkRecordRepository.findById(userIdx).orElseThrow(() -> new BaseException(BaseResponseStatus.USER_NOT_FOUND));
+            walkRecord.setHours(0);
+            walkRecord.setMinutes(0);
+            walkRecord.setDistance(0);
+            walkRecord.setPhoto(null);
+
+            weeklyWalkRecordRepository.save(walkRecord);
+
+
+            return new BaseResponse<>(walkRecord);
+        } catch (BaseException e) {
+            return new BaseResponse<>(BaseResponseStatus.WRONG_DATE);
+        }
+    }
+
 }
 
 
