@@ -17,8 +17,8 @@ import static com.example.puppyfriend.util.BaseResponseStatus.DATE_NOT_SAVE;
 
 @RestController
 @RequiredArgsConstructor
-//@RequestMapping("/api/v1/home/{userIdx}")
-@RequestMapping("home/{userIdx}")
+@RequestMapping("/api/v1/home/{userIdx}")
+//@RequestMapping("home/{userIdx}")
 @ApiOperation(value = "Home api", notes = " 해당 유저의 id를 함께 주셔야합니다. \n")
 public class PuppyController {
 
