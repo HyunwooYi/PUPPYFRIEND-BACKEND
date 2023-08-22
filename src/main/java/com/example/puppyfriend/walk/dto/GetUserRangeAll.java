@@ -21,7 +21,8 @@ import java.util.List;
 @AllArgsConstructor
 public class GetUserRangeAll {
 
-    // 유저 위치, 닉네임
+    // 유저 아이디, 위치, 닉네임
+    private int userIdx;
     private String location;
     private String nickname;
 
@@ -47,6 +48,7 @@ public class GetUserRangeAll {
         List<GetUserRangeAll> result = new ArrayList<>();
         for (User user : userList) {
             GetUserRangeAll userRangeAll = new GetUserRangeAll();
+            userRangeAll.setUserIdx((user.getUserIdx()));
             userRangeAll.setLocation(user.getLocation());
             userRangeAll.setNickname(user.getNickname());
             result.add(userRangeAll);

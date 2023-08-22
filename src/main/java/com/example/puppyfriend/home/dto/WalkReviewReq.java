@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,10 +16,16 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class WalkReviewReq {
 
-    private int walkIdx;
-    private User user;
-    private LocalDate date;
-    private String photo;
-    private String review;
+    private int userIdx;
+    private List<WalkReviewData> walkReviews;
 
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class WalkReviewData {
+        private LocalDate date;
+        private String photo;
+        private String review;
+    }
 }

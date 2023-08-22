@@ -15,9 +15,5 @@ public class RegisterReq1 {
     private LocalDate birth;
     private PuppySex sex;
     private int goal;
-//    private PuppyType type;
-//    private PuppyAge age;
-//    private PuppySize size;
-//    private List<PuppyPersonality> personalities;
 
 }
