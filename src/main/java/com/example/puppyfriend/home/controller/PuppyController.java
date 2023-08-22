@@ -132,6 +132,19 @@ public class PuppyController {
         }
     }
 
+    // 주간 산책 기록 삭제
+    @ResponseBody
+    @PostMapping("/weekly-walk-record/delete")
+    @ApiOperation(value="주간 산책 기록 삭제", notes="주간 산책 기록 삭제시 값들을 0으로 세팅합니다.")
+    public BaseResponse<String> deleteWeeklyWalkRecord(@PathVariable int userIdx, @RequestBody WeeklyWalkRecordReq weeklyWalkRecordReq) {
+        try {
+            puppyService.deleteWeeklyWalkRecord(weeklyWalkRecordReq, userIdx);
+            return new BaseResponse<>("주간 산책 기록 삭제 완료");
+        } catch (BaseException e) {
+            return new BaseResponse<>(e.getStatus());
+        }
+    }
+
 
 
 
