@@ -37,7 +37,7 @@ public class AuthenticationConfig {
                 .csrf().disable()
                 .cors().and()
                 .authorizeRequests()
-                .antMatchers("/api/v1/users/login", "/api/v1/users/join").permitAll() // join,login은 언제나 ㄱㄴ
+                .antMatchers("/api/v1/users/login", "/api/v1/users/join", "/api/v1/users/leave").permitAll() // join,login, leave은 언제나 ㄱㄴ
                 .antMatchers(HttpMethod.POST, "/api/v1/**").authenticated()// 위에 2가지를 제외한 모든 post 것들은 인증필요로 막는다.
                 .and()
                 .sessionManagement()

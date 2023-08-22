@@ -26,6 +26,7 @@ public enum BaseResponseStatus {
     //user
     INVALID_PASSWORD(false, 4222, "아이디 또는 비밀번호가 틀렸습니다."),
     ALREADY_EXISTS(false, 4223, "아이디가 이미 존재합니다."),
+    ENTITY_NOT_FOUND(false, 4224,"entity not found"),
 
     /*
      * 6000: [HOME]
