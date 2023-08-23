@@ -39,7 +39,7 @@ dependencies {
 	implementation 'javax.xml.bind:jaxb-api:2.3.0'
 
 	// aws - cloud
-	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+//	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
 }
 
 tasks.named('test') {
