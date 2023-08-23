@@ -13,8 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import static com.example.puppyfriend.util.BaseResponseStatus.ALREADY_EXISTS;
-import static com.example.puppyfriend.util.BaseResponseStatus.INVALID_PASSWORD;
+import static com.example.puppyfriend.util.BaseResponseStatus.*;
 
 @Service
 public class UserService {
@@ -68,6 +67,15 @@ public class UserService {
             throw new BaseException(ALREADY_EXISTS);
         }
         userRepository.save(user);
+    }
+
+    // 탈퇴
+    public void leaveUser(String uid) throws BaseException {
+        User user = userRepository.findByUid(uid);
+        if(user == null){
+            throw new BaseException(ENTITY_NOT_FOUND);
+        }
+        userRepository.delete(user);
     }
 
 }
