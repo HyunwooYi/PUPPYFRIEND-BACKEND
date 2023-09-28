@@ -23,12 +23,12 @@ public class UserController {
     private final UserService userService;
 
     @ResponseBody
-    @PostMapping("/login")
+    @PostMapping("/login/{userIdx}")
     @ApiOperation(value="로그인", notes="로그인 api 입니다. \n" +  "id와 password을 입력하면 로그인 성공/실패 여부를 알 수 있습니다. ")
-    public BaseResponse<String> login(UserDto userDto) {
+    public BaseResponse<String> login(@PathVariable int userIdx, UserDto userDto) {
         try{
             //userService.login(userDto.getName(), userDto.getPassword());
-            return new BaseResponse<>(userService.login(userDto.getName(), userDto.getPassword()));
+            return new BaseResponse<>(userService.login(userDto.getName(), userDto.getPassword(), userIdx));
         } catch (BaseException e) {
             return new BaseResponse<>(e.getStatus());
         }

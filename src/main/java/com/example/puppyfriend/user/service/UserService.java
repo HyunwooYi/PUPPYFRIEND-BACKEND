@@ -35,7 +35,7 @@ public class UserService {
 
     private Long expiredMs = 1000 * 60 * 60 * 6l; // 토큰 유효 시간 = 6시간
 
-    public String login(String uid, String password) throws BaseException {
+    public String login(String uid, String password, int userIdx) throws BaseException {
         // password check하는 로직
         User user = userRepository.findByUid(uid);
         if(user != null && passwordEncoder.matches(password, user.getPassword())){
